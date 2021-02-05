@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  height: 100%;
+}
+
+html {
+  background-image: url("./assets/background.svg") !important;
+  background-size: cover;
+
+  overflow-y: auto !important;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

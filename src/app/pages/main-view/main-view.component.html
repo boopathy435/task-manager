@@ -1,0 +1,62 @@
+<div class="root">
+    <div class="navbar has-gradient-text">
+          <h1 class="app-name">Task Manager</h1>
+    </div>
+  
+    <div class="board">
+  
+      <div class="board-bar">
+        <p class="board-name">{{ board.name }}</p>
+
+        <div class="actions">
+        <button mat-raised-button color="primary" class="action" (click)="createTask()">Create Task</button>
+
+        <button mat-raised-button color="accent" class="action" (click)="sortTasks()">Date Sort
+          <mat-icon *ngIf="dateSort">arrow_drop_down</mat-icon>
+          <mat-icon *ngIf="!dateSort">arrow_drop_up</mat-icon>
+        </button>
+
+        <mat-form-field class="action">
+          <mat-label>Search</mat-label>
+          <input matInput type="text" [formControl]="searchControl" (input)="taskSearch()">
+          <button mat-button matSuffix >
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+
+      </div>
+        
+      </div>
+  
+      <div class="board-wrapper">
+  
+        <div class="board-columns" cdkDropListGroup>
+          <div class="board-column" *ngFor="let column of board.columns">
+  
+            <div class="column-title">
+              {{ column.name }}
+            </div>
+  
+            <div class="tasks-container"
+            cdkDropList
+            [cdkDropListData]="column.tasks"
+            (cdkDropListDropped)="drop($event,column.name)">
+              <div class="task" *ngFor="let item of column.tasks" cdkDrag>
+                <img [src]="getImageLink(item.assigned_to)" alt="Avatar" style="width:50px">
+                <span>{{ item.message }}</span>
+                <span class="icon-grp">
+                  <mat-icon class="edit-icon" (click)="updateTask(item)">edit</mat-icon>
+                  <mat-icon class="delete-icon" (click)="deleteTask(item)">delete</mat-icon>
+                </span>
+                
+              </div>
+            </div>
+          </div>
+  
+        </div>
+  
+      </div>
+  
+    </div>
+  
+  </div>

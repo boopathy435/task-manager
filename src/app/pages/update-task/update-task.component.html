@@ -1,0 +1,42 @@
+<h2 mat-dialog-title>Update Task</h2>
+<mat-dialog-content class="mat-typography">
+  
+    <form [formGroup]="form" class="form-group">
+  
+
+        <mat-form-field appearance="fill">
+            <mat-label>Message</mat-label>
+            <input matInput type="text" formControlName="message">
+          </mat-form-field>
+    
+          <mat-form-field appearance="fill">
+            <mat-label>Due date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="due_date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+    
+          <mat-form-field appearance="fill">
+            <mat-label>Priority</mat-label>
+            <mat-select formControlName="priority">
+              <mat-option [value]="1">Normal</mat-option>
+              <mat-option [value]="2">Mid</mat-option>
+              <mat-option [value]="3">High</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Assigned to</mat-label>
+            <mat-select formControlName="assigned_to">
+            <mat-option [value]="user.id" *ngFor="let user of users">{{user.name}}</mat-option>  
+            </mat-select>
+          </mat-form-field>
+          
+      
+      </form>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" (click)="updateTask()" cdkFocusInitial>Create</button>
+</mat-dialog-actions>
